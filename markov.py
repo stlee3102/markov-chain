@@ -1,6 +1,5 @@
 """Generate Markov text from text files."""
 
-import random
 
 from random import choice
 
@@ -61,16 +60,17 @@ def make_chains(text_string):
 
 def make_text(chains):
     """Return text from chains."""
-    key =  choice(list(chains.keys()))
-    final_words = [key[0],key[1]]
-    randomValue = choice(chains[key])
+    key =  choice(list(chains.keys())) #get random key
+    final_words = [key[0],key[1]] #start final list with selected key tuple values
+    random_value = choice(chains[key]) #get random value from selected key tuple values
   
-    while randomValue is not None:
-        key = (key[1], randomValue)
-        final_words.append(randomValue)
-        randomValue = choice(chains[key])
+    while random_value is not None: 
+       
+        final_words.append(random_value) #append random value from selected key tuple to final list
+        key = (key[1], random_value) #make tuple using second word of selected key and random value of selected key
+        random_value = choice(chains[key]) #get random value
 
-    return ' '.join(final_words)
+    return ' '.join(final_words) #convert final list into a string with spaces in between elements
 
 
 input_path = 'green-eggs.txt'
